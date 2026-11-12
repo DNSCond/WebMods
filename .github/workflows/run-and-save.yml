@@ -18,7 +18,7 @@ jobs:
             - name: Install build dependencies
               run: |
                   sudo apt-get update
-                  sudo apt-get install -y autoconf automake build-essential cmake curl fonts-liberation2 git libasound2-dev libdrm-dev libgbm-dev libgl1-mesa-dev libpulse-dev libssl-dev libtool libx11-dev libxkbcommon-dev nasm ninja-build pkg-config python3 qt6-base-dev qt6-tools-dev-tools unzip zip
+                  sudo apt install -y autoconf autoconf-archive automake build-essential ccache cmake curl fonts-liberation2 git glslang-tools libdrm-dev libgl1-mesa-dev libncurses-dev libpulse-dev libtool libwayland-dev libxcb-icccm4-dev nasm ninja-build pkg-config python3-venv qt6-base-private-dev qt6-positioning-dev qt6-tools-dev-tools qt6-wayland tar unzip zip
 
             # 3. Compile Ladybird using its build script
             - name: Build Ladybird
