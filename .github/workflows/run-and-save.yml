@@ -13,7 +13,21 @@ jobs:
             # 1. Download your repository code
             - name: Checkout repository
               uses: actions/checkout@v4
+            - name: Install Qt 6.10
+              uses: jurplel/install-qt-action@v4
+              id: qt
+              with:
+                  version: '6.10.0'
+                  host: linux
+                  target: desktop
+                  arch: gcc_64
+                  modules: qtpositioning
 
+            - name: Configure Qt for CMake
+              run: |
+                  test -f "${{ steps.qt.outputs.dir }}/lib/cmake/Qt6/Qt6Config.cmake"
+                  echo "CMAKE_PREFIX_PATH=${{ steps.qt.outputs.dir }}" >> "$GITHUB_ENV"
+                  echo "Qt6_DIR=${{ steps.qt.outputs.dir }}/lib/cmake/Qt6" >> "$GITHUB_ENV"
             # 2. Install required build tools and dependencies for Ubuntu
             - name: Install build dependencies
               run: |
