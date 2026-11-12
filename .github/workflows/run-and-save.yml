@@ -1,0 +1,34 @@
+name: Build Ladybird Browser
+
+on:
+    push:
+        branches: [ main, master ]
+    workflow_dispatch: # Adds the manual "Run workflow" button in the GitHub Actions menu
+
+jobs:
+    build-linux:
+        runs-on: ubuntu-24.04
+
+        steps:
+            # 1. Download your repository code
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            # 2. Install required build tools and dependencies for Ubuntu
+            - name: Install build dependencies
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y autoconf automake build-essential cmake curl fonts-liberation2 git libasound2-dev libdrm-dev libgbm-dev libgl1-mesa-dev libpulse-dev libssl-dev libtool libx11-dev libxkbcommon-dev nasm ninja-build pkg-config python3 qt6-base-dev qt6-tools-dev-tools unzip zip
+
+            # 3. Compile Ladybird using its build script
+            - name: Build Ladybird
+              run: |
+                  ./Meta/ladybird.py build
+
+            # 4. Upload the compiled Build folder so you can download it
+            - name: Upload Ladybird Build Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ladybird-linux-build
+                  path: Build/release/
+                  retention-days: 7
