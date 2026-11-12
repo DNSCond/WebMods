@@ -13,10 +13,7 @@ jobs:
         steps:
             - name: Check OS version
               run: cat /etc/os-release
-    build-linux:
-        runs-on: ubuntu-latest
 
-        steps:
             # 1. Download your repository code
             - name: Checkout repository
               uses: actions/checkout@v4
