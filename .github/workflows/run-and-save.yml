@@ -17,10 +17,13 @@ jobs:
             # 1. Download your repository code
             - name: Checkout repository
               uses: actions/checkout@v4
-            - name: Install build dependencies
-              run: |
-                  sudo apt-get update
-                  sudo apt install -y autoconf autoconf-archive automake build-essential ccache cmake curl fonts-liberation2 git glslang-tools libdrm-dev libgl1-mesa-dev libncurses-dev libpulse-dev libtool libwayland-dev libxcb-icccm4-dev nasm ninja-build pkg-config python3-venv qt6-base-private-dev qt6-positioning-dev qt6-tools-dev-tools qt6-wayland tar unzip zip
+
+            #- name: Install build dependencies
+            #  run: |
+            #      sudo apt-get update
+            #      sudo apt install -y autoconf autoconf-archive automake build-essential ccache cmake curl fonts-liberation2 git glslang-tools libdrm-dev libgl1-mesa-dev libncurses-dev libpulse-dev libtool libwayland-dev libxcb-icccm4-dev nasm ninja-build pkg-config python3-venv qt6-base-private-dev qt6-positioning-dev qt6-tools-dev-tools qt6-wayland tar unzip zip
+            - name: Install build dependencies open-suse
+              run: zypper install autoconf-archive automake ccache cmake curl gcc16 gcc16-c++ git liberation-fonts libglvnd-devel libpulse-devel libtool nasm ncurses-devel ninja qt6-base-private-devel qt6-positioning-devel qt6-tools-devel qt6-wayland-devel tar unzip xcb-util-wm-devel zip
 
             # 3. Compile Ladybird using its build script
             - name: Build Ladybird
